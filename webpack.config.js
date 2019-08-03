@@ -1,6 +1,11 @@
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+
 module.exports = {
   module: {
     rules: [
+      /**
+       * Handle JSX
+       */
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -8,6 +13,21 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
+      /**
+       * Handle HTML
+       */
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+        },
+      },
     ],
   },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './public/index.html',
+      filename: './index.html',
+    }),
+  ],
 }
